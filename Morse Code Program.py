@@ -17,6 +17,7 @@ inputMorse = ""
 
 window = Tk()
 
+
 window.title("Chocolate Machine")
 window.configure(background = "gray")
 
@@ -35,6 +36,8 @@ leftFrame = Frame(window, bg = "gray", height=500, width=720)
 leftFrame.pack(side="left")
 leftFrame.pack_propagate(0)
 
+chartImage = PhotoImage(file="Morse to English Table.gif")
+
 
 header = Label (leftFrame, text="ENGLISH TO MORSE CODE", bg="gray", fg="black", font = "none 35 bold")
 header.pack()
@@ -47,10 +50,15 @@ e1.pack()
 submit = Button(leftFrame, text = "Translate!", command=lambda: buttonPress(0))
 submit.pack()
 
+Label(leftFrame, text = "There will be about a 0.5 second break between the end of a character a 2 second break between words.", bg="gray", font = "none 10").pack()
+
 Label(leftFrame, text = "Morse translation:", bg = "gray", font = "none 16").pack()
 
 morseLeftDisplay = Label(leftFrame, text = "", bg = "gray", font = "none 20")
 morseLeftDisplay.pack()
+
+morseChart = Label(leftFrame, image = chartImage)
+morseChart.pack()
 
 
 
@@ -130,6 +138,8 @@ def translateToMorse(inputString):
 
         if inputString[x] is not " ":
             if x > 0:
+                #pause for about 0.5 seconds in between characters
+                time.sleep(0.5)
                 translatedString += "|"
             print(morseDict[inputString[x]])
             binaryString = morseDict[inputString[x]]
@@ -145,13 +155,12 @@ def translateToMorse(inputString):
                 elif binaryString[y] == "-":
                     subprocess.call(["afplay", "dah2.wav"])
                     translatedString += "-"
-                #pause for about 1 seconds in between characters
-                time.sleep(0.5)
+
 
         elif inputString[x] == " ":
             #pause for a bout 2 seconds when in between words
             translatedString += " "
-            time.sleep(1)
+            time.sleep(2)
     #print("translate: " + translatedString)
     morseLeftDisplay.config(text = translatedString)
 
