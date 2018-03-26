@@ -3,8 +3,6 @@ from os import system
 import time
 import subprocess
 
-#subprocess.call(["afplay", "dit.wav"])
-
 #-----------------------------------Fields--------------------------------------#
 
 morseDict = {"a":".-","b":"-...","c":"-.-.","d":"-..","e":".","f":"..-.","g":"--.","h":"....","i":"..","j":".---","k":"-.-","l":".-.."
@@ -18,7 +16,7 @@ inputMorse = ""
 window = Tk()
 
 
-window.title("Chocolate Machine")
+window.title("Morse Translator")
 window.configure(background = "gray")
 
 #-----------------------------------Title--------------------------------------#
@@ -26,6 +24,7 @@ topFrame = Frame(window, bg = "gray")
 topFrame.pack(side = "top", padx=20, pady = 40)
 
 title = Label (topFrame, text="WELCOME TO MY MORSE CODE TRANSLATOR", bg="gray", fg="black", font = "none 60 bold")
+title.pack(side = "top")
 title.pack(side = "top")
 
 
@@ -42,7 +41,7 @@ chartImage = PhotoImage(file="Morse to English Table.gif")
 header = Label (leftFrame, text="ENGLISH TO MORSE CODE", bg="gray", fg="black", font = "none 35 bold")
 header.pack()
 
-Label(leftFrame, text = "Enter the sentence that you would like to be translated", bg ="gray", fg="black", font = "none 16 bold").pack()
+Label(leftFrame, text = "Enter the sentence that you would like to be translated", bg ="gray", fg="black", font = "none 18 bold").pack()
 
 e1 = Entry(leftFrame)
 e1.pack()
@@ -72,7 +71,7 @@ rightFrame.pack_propagate(0)
 header2 = Label (rightFrame, text="MORSE CODE TO ENGLISH", bg="gray", fg="black", font = "none 35 bold")
 header2.pack()
 
-Label(rightFrame, text = "Click the buttons below to write in morse", bg ="gray", fg="black", font = "none 20 bold").pack()
+Label(rightFrame, text = "Click the buttons below to write in morse", bg ="gray", fg="black", font = "none 18 bold").pack()
 
 
 Button(rightFrame, text=".", bg="gray", command=lambda: buttonPress(1)).pack()
@@ -141,7 +140,6 @@ def translateToMorse(inputString):
                 #pause for about 0.5 seconds in between characters
                 time.sleep(0.5)
                 translatedString += "|"
-            print(morseDict[inputString[x]])
             binaryString = morseDict[inputString[x]]
 
             #looping through the current character's morse version
@@ -161,7 +159,7 @@ def translateToMorse(inputString):
             #pause for a bout 2 seconds when in between words
             translatedString += " "
             time.sleep(2)
-    #print("translate: " + translatedString)
+
     morseLeftDisplay.config(text = translatedString)
 
 
